@@ -1,7 +1,16 @@
-# Maze Solver with e‑Puck Robot
+# Maze Solver with e‑Puck Robot in Webots
 
 ## 🚀 Project Overview
-This repository demonstrates pathfinding in a 4×4 maze using an e‑Puck robot in the Webots simulator. The robot uses infrared proximity sensors to detect walls and performs a depth‑first search (DFS) with a stack to navigate from the start cell (ID 3) to the center of the maze.
+This repository demonstrates a maze-solving approach in a 4×4 environment using an e‑Puck robot simulated in Webots. The robot employs infrared proximity sensors to detect walls and applies a **Depth‑First Search (DFS)** algorithm with a **stack-based implementation** to navigate from the starting cell (ID 3) to the maze's center.
+
+An alternative version using **Breadth-First Search (BFS)** can also be implemented for shortest-path exploration, but the current version focuses on DFS.
+
+## 📸 Simulation Preview
+You can find a screenshot of the simulation environment below:
+
+![Simulation Environment](./media/simulation_preview.png)
+
+📽️ A demonstration video showing the robot navigating the maze is available [here](./media/maze_solver_demo.mp4).
 
 ## 📋 Repository Structure
 ```
@@ -10,6 +19,9 @@ maze-solver-epuck/
 │   └── my_controller.py      # Robot controller implementation
 ├── worlds/
 │   └── maze.wbt            # Maze world file for Webots
+├── media/
+│   ├── simulation_preview.png  # Screenshot of Webots environment
+│   └── maze_solver_demo.mp4    # Video demo of robot in action
 ├── README.md               # This file
 └── requirements.txt        # Python dependencies (if any)
 ```
@@ -18,6 +30,11 @@ maze-solver-epuck/
 - **Python 3.8+**
 - **Webots 2023b** or later
 - **Webots Python API** (included with Webots installation)
+
+> If `requirements.txt` is provided, install dependencies with:
+> ```bash
+> pip install -r requirements.txt
+> ```
 
 ## 📥 Installation
 ```bash
@@ -46,27 +63,33 @@ rightMotor.setVelocity(0)
 ```
 
 ## 🧠 DFS Algorithm with Stack
-The core algorithm is an iterative Depth‑First Search (DFS) maintained with a stack:
-1. **Node Representation**: Each cell is a `node` object with attributes: `id`, `dir` (entry orientation), and `searched` (boolean).
-2. **Stack Usage**: The stack holds the current path and candidate nodes.
-3. **Initialization**:
-   ```python
-   stack = []
-   stack.append(start_node)  # push starting node (ID 3)
-   ```
-4. **Search Loop**:
-   ```python
-   while stack:
-       current = stack[-1]  # peek top
-       if not current.searched:
-           stack = search(current, stack, duration)  # explore neighbors
-       else:
-           stack.pop()  # backtrack
-   ```
-- When exploring a node, the `search()` function reads sensor data, identifies free directions in priority order (right → forward → left), updates the graph edges, and pushes new nodes onto the stack.  
-- If no unvisited neighbors are found, two `pop()` operations backtrack the robot physically.
+This simulation uses an iterative **Depth‑First Search (DFS)** algorithm with an explicit **stack**:
 
-### Recursive DFS Example
+1. **Node Representation**: Each maze cell is represented by a `node` object with:
+   - `id`: Cell identifier
+   - `dir`: Entry direction
+   - `searched`: Boolean flag for visitation
+
+2. **Stack Logic**:
+```python
+stack = []
+stack.append(start_node)  # Push starting node (ID 3)
+
+while stack:
+    current = stack[-1]  # Peek top of stack
+    if not current.searched:
+        stack = search(current, stack, duration)  # Explore neighbors
+    else:
+        stack.pop()  # Backtrack if fully searched
+```
+
+3. **Search Functionality**: The `search()` function does the following:
+   - Uses sensor data to determine wall presence
+   - Prioritizes directions: right → forward → left
+   - Pushes reachable, unvisited neighbors onto the stack
+   - Backtracks (pops) when no paths are available
+
+## 🔁 Recursive DFS Sample (Alternative)
 ```python
 visited = set()
 
@@ -87,16 +110,17 @@ dfs_recursive(start_node)
 ```
 
 ## ⚠️ Known Issues
-- **Return Path Accuracy**: Final calibration errors in `delay()` cause slight deviations on the return journey.
-- **Delay Tuning**: The `delay()` durations in rotation functions may require manual adjustment for precise turns.
+- **Return Path Accuracy**: The robot might slightly misalign when returning due to `delay()` timing inconsistencies.
+- **Manual Delay Calibration**: Rotation delays may require manual fine-tuning for accurate navigation.
 
 ## 🤝 Contributing
-Contributions are welcome! Feel free to open issues or submit pull requests for:
-- Optimizing sensor processing
-- Improving motor calibration
-- Refactoring code for readability
+Contributions are welcome! You can help by:
+- Implementing BFS or other search strategies
+- Enhancing movement precision
+- Refactoring code or improving modularity
+- Adding UI overlays for real-time robot state
 
 
 ---
-*For questions or feedback, please raise an issue or contact via email.*
+*For questions or feedback, please raise an issue or reach out via email.*
 
