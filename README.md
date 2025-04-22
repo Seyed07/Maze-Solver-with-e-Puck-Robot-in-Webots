@@ -8,9 +8,9 @@ An alternative version using **Breadth-First Search (BFS)** can also be implemen
 ## 📸 Simulation Preview
 You can find a screenshot of the simulation environment below:
 
-![Simulation Environment](./media/simulation_preview.png)
+![Simulation Environment](./image_video/1.png)
 
-📽️ A demonstration video showing the robot navigating the maze is available [here](./media/maze_solver_demo.mp4).
+📽️ A demonstration video showing the robot navigating the maze is available [here](./image_video/maze_1.mp4).
 
 ## 📋 Repository Structure
 ```
@@ -23,7 +23,6 @@ maze-solver-epuck/
 │   ├── simulation_preview.png  # Screenshot of Webots environment
 │   └── maze_solver_demo.mp4    # Video demo of robot in action
 ├── README.md               # This file
-└── requirements.txt        # Python dependencies (if any)
 ```
 
 ## 🔧 Prerequisites
@@ -31,18 +30,12 @@ maze-solver-epuck/
 - **Webots 2023b** or later
 - **Webots Python API** (included with Webots installation)
 
-> If `requirements.txt` is provided, install dependencies with:
-> ```bash
-> pip install -r requirements.txt
-> ```
-
 ## 📥 Installation
 ```bash
 # Clone the repository
-git clone https://github.com/<username>/maze-solver-epuck.git
+git clone https://github.com/Seyed07/Maze-Solver-with-e-Puck-Robot-in-Webots
 cd maze-solver-epuck
 ```
-
 ## ▶️ Running the Simulation
 1. Launch Webots.
 2. Open the world file: **File → Open World → worlds/maze.wbt**.
