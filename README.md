@@ -34,7 +34,7 @@ maze-solver-epuck/
 ```bash
 # Clone the repository
 git clone https://github.com/Seyed07/Maze-Solver-with-e-Puck-Robot-in-Webots
-cd maze-solver-epuck
+cd Maze-Solver-with-e-Puck-Robot-in-Webots
 ```
 ## ▶️ Running the Simulation
 1. Launch Webots.
